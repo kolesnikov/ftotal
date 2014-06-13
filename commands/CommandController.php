@@ -162,7 +162,6 @@ class CommandController extends Controller
             $costPlan->week = $weekNumber;
             $costPlan->totalCost = 0;
             $costPlan->factCost = 0;
-            $costPlan->factBalance = 0;
             $costPlan->year = date('Y');
             $costPlan->startWeek = $weekData[0]['date'];
             $costPlan->endWeek = $weekData[6]['date'];
@@ -170,6 +169,8 @@ class CommandController extends Controller
             foreach ($weekData as $week) {
                 $costPlan->totalCost += $week['cost'];
             }
+
+            $costPlan->factBalance = $costPlan->totalCost;
 
             if (!$costPlan->save())
                 die(var_export($costPlan->errors, true));

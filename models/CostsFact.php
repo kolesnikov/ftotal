@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use app\models\CostsPlan;
+use app\components\Notifier;
 
 /**
  * This is the model class for table "costsFact".
@@ -82,7 +83,8 @@ class CostsFact extends \yii\db\ActiveRecord
 
             if ($costPlan->save())
             {
-                //TODO Повесть событие на уведомление
+                $message = sprintf('Cумма %s руб. зафиксированна. Остаток за неделю %s рублей.', $total, $costPlan->factBalance);
+                Notifier::send($message);
             }
             else{
                 \Yii::error(var_export($costPlan->errors));

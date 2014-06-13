@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use app\models\CostsPlan;
 
 /**
  * This is the model class for table "costsFact".
@@ -72,6 +73,23 @@ class CostsFact extends \yii\db\ActiveRecord
         $this->total = $total;
         $this->week = date('W');
         $this->user = $user;
-        $this->save();
+
+        if ($this->save())
+        {
+            $costPlan = CostsPlan::findOne(['week' => date('W')]);
+            $costPlan->factCost += $total;
+            $costPlan->factBalance -= $total;
+
+            if ($costPlan->save())
+            {
+                //TODO Повесть событие на уведомление
+            }
+            else{
+                \Yii::error(var_export($costPlan->errors));
+            }
+        }
+        else{
+            \Yii::error(var_export($this->errors));
+        }
     }
 }

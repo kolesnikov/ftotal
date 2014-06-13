@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: kolesnikov
- * Date: 13.06.14
- * Time: 22:42
+ * @see https://github.com/barbushin/php-imap
+ * @author Barbushin Sergey http://linkedin.com/in/barbushin
+ *
  */
 
 namespace app\components;

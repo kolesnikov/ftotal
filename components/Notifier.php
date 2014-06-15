@@ -22,8 +22,6 @@ class Notifier
         foreach (\Yii::$app->params['notified']['pushover']['users'] as $user) {
             $push->setUser($user);
             $push->send();
-
-            die('Отправил');
         }
     }
 

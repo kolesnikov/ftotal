@@ -19,7 +19,7 @@ class MailController extends Controller
         $imap = \Yii::$app->params['imap'];
 
         $mailbox = new ImapMailbox($imap['host'], $imap['username'], $imap['password'], '/', 'utf-8');
-        $mailsIds = $mailbox->searchMailBox('ALL');
+        $mailsIds = $mailbox->searchMailBox('NEW');
 
         if (!$mailsIds) {
             die('Mailbox is empty');
